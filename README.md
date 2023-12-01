@@ -5,7 +5,7 @@ https://adventofcode.com/
 ## Progress
 | Day      | Stars |
 | ----------- | ----------- |
-| 1   |         |
+| 1   | ⭐ ⭐         |
 | 2   |         |
 | 3   |         |
 | 4   |   	|
