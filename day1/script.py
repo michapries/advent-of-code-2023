@@ -11,7 +11,9 @@ def get_input():
     with open(f'./day1/input.txt', 'r') as input:
         return input.readlines()
 
-# include_words is a boolean that is used to include the words for each digit (task 2)
+
+# Returns first and last digit of the string.
+# include_words is a boolean that is used to include the words for each digit (task 2).
 def calc_digits(row, include_words):
     digits = [-1, -1]
 

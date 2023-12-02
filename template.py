@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from datetime import date
+import math
 
 def get_day():
     return date.today().strftime('%-d')
