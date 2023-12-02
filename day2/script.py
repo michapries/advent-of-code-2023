@@ -25,7 +25,7 @@ def task_one():
 
     for row in input:       
         game_id = int(row[5:row.find(':')])
-        row = row.split(': ')[1].replace(';', ',')      # Replace semicolons by commas because we don't need the semicolons anyway for task 1
+        row = row.split(': ')[1].replace(';', ',')      # Replace semicolons by commas because we don't need the semicolons anyway for task 1.
         
         semi_split = [x.strip() for x in row.split(',')]
 
