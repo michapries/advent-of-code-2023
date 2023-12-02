@@ -8,7 +8,7 @@ def get_input():
 
     day = date.today().strftime('%-d')
 
-    with open(f'./day{day}/input.txt', 'r') as input:
+    with open(f'./day1/input.txt', 'r') as input:
         return input.readlines()
 
 # include_words is a boolean that is used to include the words for each digit (task 2)
@@ -40,6 +40,7 @@ def calc_digits(row, include_words):
 
 def main(is_task2):
     input = get_input()
+    print(input)
 
     sum = 0
 
