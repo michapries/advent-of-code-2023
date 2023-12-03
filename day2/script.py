@@ -8,7 +8,7 @@ def get_day():
 
 
 def get_input():
-    with open(f'./day{get_day()}/input.txt', 'r') as input:
+    with open(f'./day2/input.txt', 'r') as input:
         return input.readlines()
     
 
@@ -16,7 +16,7 @@ def get_testinput(task):
     if task not in [1, 2]:
         raise Exception('Not a valid task.')
     else:
-        with open(f'./day{get_day()}/testinput{task}.txt', 'r') as input:
+        with open(f'./day2/testinput{task}.txt', 'r') as input:
             return input.readlines()
 
 
