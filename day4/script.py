@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from datetime import date
+from operator import eq
 
 def get_day():
     return date.today().strftime('%-d')
@@ -19,9 +20,26 @@ def get_testinput(task):
             return input.readlines()
 
 
+def task_one():
+    input = [x.strip('\n') for x in get_input()] 
+    
+    sum = 0
+
+    for row in input:
+        split = [x.split(' ') for x in row.replace('  ', ' ').split(': ')[1].split(' | ')] 
+        for i in range(len(split)):
+            split[i] = [int(x) for x in split[i]]
+        
+        shared_elems = len(set(split[0]).intersection(split[1]))
+        
+        sum += 2 ** (shared_elems - 1) if shared_elems > 0 else 0
+
+    return sum
+
+
 def main(is_task2):
     if not is_task2:
-        pass
+        return task_one()
     else:
         pass
 
