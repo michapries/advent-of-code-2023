@@ -20,13 +20,13 @@ def get_testinput(task):
             return input.readlines()
 
 
-def main(is_task2):
-    if not is_task2:
+def main(is_task1):
+    if is_task1:
         pass
     else:
         pass
 
 
-print("Task 1: ", main(False))
+print("Task 1: ", main(True))
 
-print("Task 2: ", main(True))
+print("Task 2: ", main(False))
