@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from datetime import date
+from collections import defaultdict
 import math
 
 def get_day():
@@ -25,7 +26,7 @@ def parse(part):
         input = [x.strip('\n') for x in get_input() if x.strip('\n') != '']
     else:
         input = [x.strip('\n') for x in get_testinput(part) if x.strip('\n') != '']
-    #input = [x.strip('\n') for x in get_input() if x.strip('\n') != '']
+
     rl = input[0]
     network = dict()
     for map in input[1:]:
@@ -35,31 +36,31 @@ def parse(part):
     return rl, network
 
 
-def part1():
+def main(is_part1):
     rl, network = parse(0)
     
-    i = 0
-    cur_node = 'AAA'
+    # Indices where each of the starting nodes encouters a Z for the first time during the traversal.
+    z_indices = [-1] * 6
 
+    cur_nodes = ['AAA'] if is_part1 else [node for node in network.keys() if node[2] == 'A']
+    i = 0
     while True:
         cur_direction = rl[i % len(rl)]
         i += 1
-        new_node = network[cur_node][0] if cur_direction == 'L' else network[cur_node][1]
-        if new_node == 'ZZZ':
-            return i
-        else:
-            cur_node = new_node
-
         
-def part2():
-    return
-                
+        new_nodes = list()
 
-def main(is_part1):
-    if is_part1:
-        return part1()
-    else:
-        return part2()
+        for idx, node in enumerate(cur_nodes):
+            new_nodes.append(network[node][0] if cur_direction == 'L' else network[node][1])
+            if new_nodes[-1][2] == 'Z':
+                z_indices[idx] = i
+            
+        if is_part1 and new_nodes[0] == 'ZZZ':
+            return i
+        elif not is_part1 and -1 not in z_indices:
+            return math.lcm(*z_indices)
+        else:
+            cur_nodes = new_nodes
 
 
 print("Part 1: ", main(True))
