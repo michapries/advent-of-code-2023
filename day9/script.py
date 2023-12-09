@@ -46,7 +46,7 @@ def part1():
 
 
 def part2():
-    return
+    return 
 
 
 def main(is_part1):
