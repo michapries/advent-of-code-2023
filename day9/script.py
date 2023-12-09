@@ -21,7 +21,28 @@ def get_testinput(task):
 
 
 def part1():
-    return
+    #input = [x.strip('\n').split(' ') for x in get_testinput(1)]
+    input = [x.strip('\n').split(' ') for x in get_input()]
+    input = list(map(lambda sublist : list(map(int, sublist)), input))
+    
+    next_values = list()
+
+    for row in input:
+        diffs = [row]
+        for diff in diffs:    
+            diff = [diff[i+1] - diff[i] for i in range(len(diff)-1)]
+            
+            diffs.append(diff)
+            if len(set(diff)) == 1:
+                diffs[-1].append(diff[0])
+                for i in range(1, len(diffs)):
+                    # Append the sum of the last element of the current and previous (one layer further down) row of differences.
+                    diffs[-i-1].append(diffs[-i-1][-1] + diffs[-i][-1]) 
+                next_values.append(diffs[0][-1])
+                break
+        
+    #print('next_values:', next_values)
+    return sum(next_values)    
 
 
 def part2():
