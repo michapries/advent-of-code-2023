@@ -52,7 +52,7 @@ def main(is_part1):
 
         for idx, node in enumerate(cur_nodes):
             new_nodes.append(network[node][0] if cur_direction == 'L' else network[node][1])
-            if new_nodes[-1][2] == 'Z':
+            if new_nodes[-1][2] == 'Z' and z_indices[idx] == -1:
                 z_indices[idx] = i
             
         if is_part1 and new_nodes[0] == 'ZZZ':
