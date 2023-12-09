@@ -20,7 +20,7 @@ def get_testinput(task):
             return input.readlines()
 
 
-def part1():
+def main(is_part1):
     #input = [x.strip('\n').split(' ') for x in get_testinput(1)]
     input = [x.strip('\n').split(' ') for x in get_input()]
     input = list(map(lambda sublist : list(map(int, sublist)), input))
@@ -34,26 +34,16 @@ def part1():
             
             diffs.append(diff)
             if len(set(diff)) == 1:
-                diffs[-1].append(diff[0])
+                diffs[-1].append(diff[0]) if is_part1 else diffs[-1].insert(0, (diff[0]))
                 for i in range(1, len(diffs)):
-                    # Append the sum of the last element of the current and previous (one layer further down) row of differences.
-                    diffs[-i-1].append(diffs[-i-1][-1] + diffs[-i][-1]) 
-                next_values.append(diffs[0][-1])
+                    # For Part 1: Append the sum of the last element of the current and previous (one layer further down) row of differences.
+                    # For Part 2: Prepend the subtraction result of the first element of the current and previous (one layer further down) row of differences.
+                    diffs[-i-1].append(diffs[-i-1][-1] + diffs[-i][-1]) if is_part1 else diffs[-i-1].insert(0, (diffs[-i-1][0] - diffs[-i][0])) 
+                next_values.append(diffs[0][-1]) if is_part1 else next_values.append(diffs[0][0])
                 break
         
     #print('next_values:', next_values)
-    return sum(next_values)    
-
-
-def part2():
-    return 
-
-
-def main(is_part1):
-    if is_part1:
-        return part1()
-    else:
-        return part2()
+    return sum(next_values)  
 
 
 print("Part 1: ", main(True))
