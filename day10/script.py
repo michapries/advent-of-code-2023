@@ -20,28 +20,6 @@ def get_testinput(task):
         with open(f'./day10/testinput{task}.txt', 'r') as input:
             return input.readlines()
 
-# Returns a dict of neighbors of the node at i,j. k: neighboring node, v: indices of that node
-def get_connecting_neighbors1(grid, i, j):
-    node = grid[i][j]
-    up = ['|', '7', 'F', 'S']
-    down = ['|', 'L', 'J', 'S']
-    left = ['-', 'L', 'F', 'S']
-    right = ['-', 'J', '7', 'S']
-
-    valid_directions = defaultdict(list)
-
-    if i in range(1, grid.shape[0]-1):
-        if node in down and grid[i-1][j] in up:
-            valid_directions[grid[i-1][j]].append((i-1, j))
-        if node in up and grid[i+1][j] in down:
-            valid_directions[grid[i+1][j]].append((i+1, j))
-    if j in range(1, grid.shape[1]-1):
-        if node in left and grid[i][j+1] in right:
-            valid_directions[grid[i][j+1]].append((i, j+1))
-        if node in right and grid[i][j-1] in left:
-            valid_directions[grid[i][j-1]].append((i, j-1))
-
-    return dict(valid_directions)
     
 def get_connecting_neighbors(grid, i, j):
     node = grid[i][j]
@@ -61,7 +39,6 @@ def get_connecting_neighbors(grid, i, j):
     if node in right and grid[i][j-1] in left and j-1 < grid.shape[1]:
         valid_directions[f'{grid[i][j-1]}_{str(i)}_{str(j-1)}'] = (i, j-1)
 
-    #print('valid', valid_directions)
     return dict(valid_directions)
 
 
@@ -72,7 +49,6 @@ def animal_search(grid, i, j):
         neighbors = {k.split('_')[0]: v for k, v in get_connecting_neighbors(grid, i, j).items() if v not in already_visited and k != 'S'}
         if not neighbors:
             break
-        #print(grid[i][j], 'neigh', neighbors, iterations)
         neighbor_vals = list(neighbors.values())
         
         already_visited.append((i, j))
