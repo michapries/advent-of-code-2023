@@ -42,7 +42,7 @@ def get_connecting_neighbors(grid, i, j):
     return dict(valid_directions)
 
 
-def animal_search(grid, i, j):
+def animal_search(grid, i, j, is_part1):
     already_visited = list()
     iterations = 0
     while True:
@@ -56,18 +56,29 @@ def animal_search(grid, i, j):
         i, j = neighbor_vals[0][0], neighbor_vals[0][1]
         iterations += 1
         
-    return math.ceil(iterations/2)
+    if is_part1:
+        return math.ceil(iterations/2)
+    else:
+        already_visited.append((i, j))
+        return already_visited
 
 
 def part1():
-    #grid = np.array([[*x.strip('\n')] for x in get_testinput(1)])
+    grid = np.array([[*x.strip('\n')] for x in get_testinput(1)])
     grid = np.array([[*x.strip('\n')] for x in get_input()])
     s = [x[0] for x in np.where(grid == 'S')]
-    print(animal_search(grid, s[0], s[1]))
+    return animal_search(grid, s[0], s[1], True)
 
 
 def part2():
-    return
+    grid = np.array([[*x.strip('\n')] for x in get_testinput(2)])
+    s = [x[0] for x in np.where(grid == 'S')]
+    one_zero_arr = np.zeros(grid.shape)
+    loop_indices = animal_search(grid, s[0], s[1], False)
+    for idx in loop_indices:
+        one_zero_arr[idx] = 1
+
+    #for row in one_zero_arr
 
 
 def main(is_part1):
