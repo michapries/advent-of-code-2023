@@ -35,5 +35,5 @@ def main(is_part1):
         return part2()
 
 
-print("Part 1: ", main(True))
-print("Part 2: ", main(False))
+print("Part 1:", main(True))
+print("Part 2:", main(False))
